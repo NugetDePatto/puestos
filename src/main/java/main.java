@@ -3,7 +3,7 @@ import views.MainView;
 
 public class main {
       public static void main(String[] args) {
-            PuestosService.init();
+            new PuestosService();
             new MainView();
     }
 }
