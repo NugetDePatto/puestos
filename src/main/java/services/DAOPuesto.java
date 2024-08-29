@@ -2,21 +2,32 @@ package services;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import models.PuestoModel;
 
 public class DAOPuesto {
-    public static List<PuestoModel> getAllPuestosModels(Connection connection) {
+
+    private  DAOPuesto() {}
+
+    private static Connection getConnection() {
+        try {
+            return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/?user=root/tienda", "root", "admin");
+        } catch (SQLException e) {
+            System.out.println("Error al conectar a la base de datos" + e.getMessage());
+            return null;
+        }
+    }
+
+    public static List<PuestoModel> getAllPuestosModels() {
         List<PuestoModel> puestos = new ArrayList<>();
         
         try {
-            CallableStatement statement = connection.prepareCall("call obtenerTodosLosPuestos()");
+            CallableStatement statement = getConnection().prepareCall("call tienda.obtenerTodosLosPuestos()");
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -26,7 +37,7 @@ public class DAOPuesto {
                 puestos.add(new PuestoModel(id, descripcion));
             }
         } catch (SQLException e) {
-            Logger.getLogger(DAOPuesto.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Error al obtener los puestos" + e.getMessage());
 
         }
 
