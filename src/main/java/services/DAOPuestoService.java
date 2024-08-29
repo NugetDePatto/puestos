@@ -10,9 +10,10 @@ import java.util.List;
 
 import models.PuestoModel;
 
-public class DAOPuesto {
+public class DAOPuestoService {
 
-    private  DAOPuesto() {}
+    private DAOPuestoService() {
+    }
 
     private static Connection getConnection() {
         try {
@@ -25,7 +26,7 @@ public class DAOPuesto {
 
     public static List<PuestoModel> getAllPuestosModels() {
         List<PuestoModel> puestos = new ArrayList<>();
-        
+
         try {
             CallableStatement statement = getConnection().prepareCall("call tienda.obtenerTodosLosPuestos()");
             ResultSet resultSet = statement.executeQuery();

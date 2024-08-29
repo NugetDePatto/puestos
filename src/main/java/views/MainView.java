@@ -3,7 +3,7 @@ package views;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import services.PuestosService;
+import services.DAOPuestoService;
 
 public class MainView extends JFrame {
 
@@ -14,9 +14,7 @@ public class MainView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-
-
-        add(new JScrollPane( new MainPuestosPanel(new PuestosService().getListPuestos()) ));
+        add(new JScrollPane(new MainPuestosPanel(DAOPuestoService.getAllPuestosModels())));
 
         setVisible(true);
     }

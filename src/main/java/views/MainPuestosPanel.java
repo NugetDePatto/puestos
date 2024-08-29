@@ -31,5 +31,4 @@ public class MainPuestosPanel extends JPanel {
         }
     }
 
-
 }

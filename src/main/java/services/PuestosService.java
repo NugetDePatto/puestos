@@ -14,16 +14,16 @@ public class PuestosService {
     }
 
     // public static PuestosService get() {
-    //     return instance;
+    // return instance;
     // }
 
     // public static PuestosService init() {
-    //     instance = new PuestosService();
-    //     listPuestos = new ArrayList<>();
-        
-    //     instance.testPuestos();
- 
-    //     return instance;
+    // instance = new PuestosService();
+    // listPuestos = new ArrayList<>();
+
+    // instance.testPuestos();
+
+    // return instance;
     // }
 
     public List<PuestoModel> getListPuestos() {
@@ -54,7 +54,7 @@ public class PuestosService {
         }
         return null;
     }
-    
+
     public void removePuestoById(int id) {
         for (PuestoModel p : listPuestos) {
             if (p.getId() == id) {
