@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import models.PuestoModel;
-import services.PuestosService;
+import repositories.PuestosRepository;
 
 public class MainTableController {
     private DefaultTableModel model;
@@ -23,7 +23,7 @@ public class MainTableController {
     public DefaultTableModel setModel() {
         String[] columnNames = { "ID", "Descripción" };
 
-        List<PuestoModel> data = PuestosService.getAllPuestosModels();
+        List<PuestoModel> data = PuestosRepository.getAllPuestosModels();
 
         Object[][] rowData = new Object[data.size()][2];
 
@@ -47,7 +47,7 @@ public class MainTableController {
     }
 
     public void updateTable() {
-        List<PuestoModel> data = PuestosService.getAllPuestosModels();
+        List<PuestoModel> data = PuestosRepository.getAllPuestosModels();
 
         model.setRowCount(0);
 

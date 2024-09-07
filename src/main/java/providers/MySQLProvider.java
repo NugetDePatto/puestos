@@ -1,4 +1,4 @@
-package services;
+package providers;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MySQLService {
+public class MySQLProvider {
 
-    private MySQLService() {
+    private MySQLProvider() {
     }
 
     private static Connection getConnection() {

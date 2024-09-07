@@ -25,7 +25,7 @@ public class MainView extends JFrame {
 
         JButton addPuestoButton = new JButton("Agregar Puesto");
         addPuestoButton.addActionListener(e -> {
-            controller.addPuesto("Nuevo Puesto", tableController);
+            controller.addPuesto(tableController);
         });
 
         add(addPuestoButton);

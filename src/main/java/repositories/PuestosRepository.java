@@ -1,13 +1,13 @@
-package services;
+package repositories;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import models.PuestoModel;
 
-public class PuestosService {
+public class PuestosRepository {
 
-    private PuestosService() {
+    private PuestosRepository() {
     }
 
     public static List<PuestoModel> getAllPuestosModels() {
