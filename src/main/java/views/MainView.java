@@ -5,9 +5,11 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controllers.MainController;
 import controllers.MainTableController;
 
 public class MainView extends JFrame {
+    MainController controller = new MainController();
 
     public MainView() {
         super("Puestos");
@@ -15,23 +17,18 @@ public class MainView extends JFrame {
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        // poner una columna de componentes
         setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
-        // add(new JScrollPane(new MainPuestosPanel()));
-        JTable table = new MainTableView();
+        MainTableController tableController = new MainTableController();
+        JTable table = new MainPuestosTable(tableController);
         add(new JScrollPane(table));
 
-        // add boton
         JButton addPuestoButton = new JButton("Agregar Puesto");
         addPuestoButton.addActionListener(e -> {
-            MainTableController.get().addPuestoModel("Nuevo Puesto");
+            controller.addPuesto("Nuevo Puesto", tableController);
         });
 
-        add(addPuestoButton, 1);
-
-        setVisible(true);
+        add(addPuestoButton);
     }
 
 }

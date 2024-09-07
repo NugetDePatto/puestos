@@ -8,46 +8,52 @@ import models.PuestoModel;
 import services.PuestosService;
 
 public class MainTableController {
-    // singleton
-    private static MainTableController instance = null;
+    private DefaultTableModel model;
 
-    private DefaultTableModel model = new DefaultTableModel(new String[] { "ID", "Descripción" }, 0);
+    public MainTableController() {
+        model = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Descripción" }) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
-    private MainTableController() {
     }
 
-    public static MainTableController get() {
-        if (instance == null) {
-            instance = new MainTableController();
+    public DefaultTableModel setModel() {
+        String[] columnNames = { "ID", "Descripción" };
+
+        List<PuestoModel> data = PuestosService.getAllPuestosModels();
+
+        Object[][] rowData = new Object[data.size()][2];
+
+        for (int i = 0; i < data.size(); i++) {
+            rowData[i][0] = data.get(i).getId();
+            rowData[i][1] = data.get(i).getDescripcion();
         }
-        return instance;
+
+        model = new DefaultTableModel(rowData, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        return model;
     }
 
     public DefaultTableModel getModel() {
         return model;
     }
 
-    public DefaultTableModel setModel(Object[][] rowData, String[] columnNames) {
-        model = new DefaultTableModel(rowData, columnNames);
-        return model;
-    }
-
-    public void addPuestoModel(String descripcion) {
-        PuestosService.addPuestoModel(descripcion);
-
-        updateTable();
-    }
-
-    private void updateTable() {
+    public void updateTable() {
         List<PuestoModel> data = PuestosService.getAllPuestosModels();
 
-        int lastRow = data.size() - 1;
+        model.setRowCount(0);
 
-        int id = data.get(lastRow).getId();
-
-        String descripcion = data.get(lastRow).getDescripcion();
-
-        model.addRow(new Object[] { id, descripcion });
+        for (int i = 0; i < data.size(); i++) {
+            model.addRow(new Object[] { data.get(i).getId(), data.get(i).getDescripcion() });
+        }
 
     }
 

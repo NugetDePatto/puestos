@@ -37,7 +37,6 @@ public class MySQLService {
                 for (String column : columns) {
                     row.put(column, resultSet.getString(column));
                 }
-                System.out.println(row);
 
                 table.add(row);
             }
@@ -95,25 +94,3 @@ public class MySQLService {
     }
 
 }
-
-// public static List<PuestoModel> getAllPuestosModels() {
-// List<PuestoModel> puestos = new ArrayList<>();
-
-// try {
-// CallableStatement statement = getConnection().prepareCall("call
-// tienda.obtenerTodosLosPuestos()");
-// ResultSet resultSet = statement.executeQuery();
-
-// while (resultSet.next()) {
-// int id = resultSet.getInt("id");
-// String descripcion = resultSet.getString("descripcion");
-
-// puestos.add(new PuestoModel(id, descripcion));
-// }
-// } catch (SQLException e) {
-// System.out.println("Error al obtener los puestos" + e.getMessage());
-
-// }
-
-// return puestos;
-// }
